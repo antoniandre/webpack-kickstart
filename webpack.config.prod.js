@@ -1,11 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+// To try on local.
 const webpack = require('webpack');
 
 module.exports = {
     entry: {
-        'app': './src/index.js'
+        app: './src/index.js'
     },
     devtool: 'inline-source-map',
     devServer: {
@@ -15,8 +17,10 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({ title: 'Webpack Kickstart' }),
+        // To try on local.
         new webpack.NamedModulesPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new UglifyJSPlugin()
     ],
     module: {
         rules: [

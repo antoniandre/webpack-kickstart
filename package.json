@@ -6,7 +6,9 @@
   "scripts": {
     "watch": "webpack --config webpack.config.dev.js --progress --watch",
     "start": "webpack-dev-server --config webpack.config.dev.js --open",
+    "start:prod": "webpack-dev-server --config webpack.config.prod.js --open",
     "build": "webpack --config webpack.config.dev.js",
+    "build:prod": "webpack --config webpack.config.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,6 +27,7 @@
     "file-loader": "^1.1.6",
     "html-webpack-plugin": "^2.30.1",
     "style-loader": "^0.19.1",
+    "uglifyjs-webpack-plugin": "^1.1.6",
     "webpack": "^3.10.0",
     "webpack-dev-middleware": "^2.0.4",
     "webpack-dev-server": "^2.10.1"
