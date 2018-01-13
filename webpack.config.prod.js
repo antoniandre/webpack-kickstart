@@ -1,15 +1,14 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-// Uncomment to try on local.
-// const webpack = require('webpack');
 
 module.exports = {
     entry: {
         app: './src/index.js'
     },
-    devtool: 'inline-source-map',
+    devtool: 'source-map',
     devServer: {
       contentBase: './dist',
       hot: true
@@ -17,10 +16,16 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({ title: 'Webpack Kickstart' }),
+
         // Uncomment to try on local.
         // new webpack.NamedModulesPlugin(),
         // new webpack.HotModuleReplacementPlugin(),
-        new UglifyJSPlugin()
+
+        new UglifyJSPlugin({ sourceMap: true }),
+
+        // Allow to do sth like:
+        // if (process.env.NODE_ENV !== 'production') {console.log('dev mode!');}
+        new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('production') })
     ],
     module: {
         rules: [
