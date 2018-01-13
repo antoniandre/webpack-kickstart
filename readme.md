@@ -1,6 +1,7 @@
 # New project with Webpack
 
-This file is about how to create this kickstart from scratch!
+This file is about how to create this kickstart project from scratch.
+
 ## Basic Setup
 
 First let's create a directory, initialize npm, and install webpack locally:
