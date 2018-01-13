@@ -2,7 +2,7 @@ import './style.css';
 
 function component() {
     var element = document.createElement('h1');
-    element.innerHTML = "Hello World! ";
+    element.innerHTML = "Hello World!";
 
     return element;
 }
