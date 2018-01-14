@@ -90,3 +90,24 @@ Run npm start and open your project dist folder in browser!
 ```bash
 npm start
 ```
+
+## Next
+
+- Pimp your devpack https://webpack.js.org/guides/
+- Install Babel
+
+### Install Babel
+
+```bash
+# All needed for webpack.
+npm install --save-dev babel-cli babel-preset-env babel-loader babel-core
+```
+__.babelrc__
+
+```json
+{
+  "presets": ["env"]
+}
+```
+
+Then add this line to your webpack config modules rules: `{ test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },`
