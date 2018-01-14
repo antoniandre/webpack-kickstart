@@ -1,10 +1,11 @@
-import './style.css';
+import path from 'path'
+import './style.css'
 
-function component() {
-    var element = document.createElement('h1');
-    element.innerHTML = "Hello World!";
+const component = () => {
+    let element = document.createElement('h1')
+    element.innerHTML = "Hello World!"
 
-    return element;
+    return element
 }
 
-document.body.appendChild(component());
+document.body.appendChild(component())
