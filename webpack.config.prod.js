@@ -6,26 +6,28 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     entry: {
-        app: './src/index.js'
+        app: './src/index.js',
+        // Also a good practice to separate third-party libs into a vendor chunk
+        // (less likely to change than local source code).
+        // vendor: [
+        //     'lodash'
+        // ]
     },
     devtool: 'source-map',
     devServer: {
-      contentBase: './dist',
-      hot: true
+      contentBase: './dist'
     },
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({ title: 'Webpack Kickstart' }),
-
-        // Uncomment to try on local.
-        // new webpack.NamedModulesPlugin(),
-        // new webpack.HotModuleReplacementPlugin(),
-
         new UglifyJSPlugin({ sourceMap: true }),
 
         // Allow to do sth like:
         // if (process.env.NODE_ENV !== 'production') {console.log('dev mode!');}
-        new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('production') })
+        new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('production') }),
+
+        // Deduplicate modules.
+        new webpack.optimize.CommonsChunkPlugin({ name: 'common' }) // Specify the common bundle's name.
     ],
     module: {
         rules: [
@@ -35,7 +37,7 @@ module.exports = {
         ]
     },
     output: {
-        filename: '[name].bundle.js',
+        filename: '[name].[hash].js',// Hash is different on each build, allows smart caching/flushing of file.
         path: path.resolve(__dirname, 'dist'),
         // To use with express server.
         // publicPath: '/'
