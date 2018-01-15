@@ -96,13 +96,16 @@ npm start
 - Pimp your devpack https://webpack.js.org/guides/
 - Install Babel
 
-### Install Babel
+### Using Babel
 
+> _Babel_ let you write JavaScript code in ES6 syntax then it will convert it to ES5-like code for full browser support.
+
+__Install babel__
 ```bash
 # All needed for webpack.
 npm install --save-dev babel-cli babel-preset-env babel-loader babel-core
 ```
-__.babelrc__
+__create a `.babelrc` file:__
 
 ```json
 {
@@ -110,4 +113,41 @@ __.babelrc__
 }
 ```
 
-Then add this line to your webpack config modules rules: `{ test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },`
+__Update your webpack config__
+
+Add this line to your webpack config modules rules:
+```javascript
+{ test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
+```
+
+__Use ES6 syntax__
+
+You can now write code in ES6 syntax, let's rewrite `src/index.js`:
+
+```javascript
+import path from 'path'
+import './style.css'
+
+const component = () => {
+    let element = document.createElement('h1')
+    element.innerHTML = "Hello World!"
+
+    return element
+}
+
+document.body.appendChild(component())
+```
+
+__Test that it is working__
+
+At this point, if you comment the line:
+```javascript
+{ test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
+```
+from webpack config and rebuild, the app will still run.
+
+But checking the bundled js file in the network tab of browser dev tools will reveal the exact same code as you wrote.
+
+(you can look for `hello world` and see the wrapping function syntax)
+
+> Now if you uncomment the above line, in the network tab of the browser's dev tool you will see "transpiled" code written in ES5 syntax.
